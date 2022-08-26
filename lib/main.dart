@@ -1,346 +1,135 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'QRViewExample.dart';
+import 'QRHomePage.dart';
 
 void main() => runApp(
     const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: MyHome()
+        home: StartScreen()
     )
 );
 
-class MyHome extends StatefulWidget {
-  const MyHome({Key? key}) : super(key: key);
-
-  // @override
-  // State<MyHome> createState() => _MyHomeState();
+class StartScreen extends StatefulWidget {
+  const StartScreen({Key? key}) : super(key: key);
 
   @override
-  _MyHomeState createState() {
-    return _MyHomeState();
-  }
+  State<StartScreen> createState() => _StartScreenState();
 }
 
-class _MyHomeState extends State<MyHome> {
+class _StartScreenState extends State<StartScreen> {
 
-  bool FLConnected = false, FRConnected = false, MLConnected = false, MRConnected = false, BLConnected = false, BRConnected = false;
-  String FLssid = "", FRssid = "", MLssid = "", MRssid = "", BLssid = "", BRssid = "";
-  String FLpassword = "", FRpassword = "", MLpassword = "", MRpassword = "", BLpassword = "", BRpassword = "";
+  List multipleSelected = [];
+  List checkListItems = [
+    {
+      "id": 0,
+      "value": false,
+      "title": "FL",
+      "connected": false,
+      "ssid" : "",
+      "password" : ""
+    },
+    {
+      "id": 1,
+      "value": false,
+      "title": "FR",
+      "connected": false,
+      "ssid" : "",
+      "password" : ""
+    },
+    {
+      "id": 2,
+      "value": false,
+      "title": "ML",
+      "connected": false,
+      "ssid" : "",
+      "password" : ""
+    },
+    {
+      "id": 3,
+      "value": false,
+      "title": "MR",
+      "connected": false,
+      "ssid" : "",
+      "password" : ""
+    },
+    {
+      "id": 4,
+      "value": false,
+      "title": "BL",
+      "connected": false,
+      "ssid" : "",
+      "password" : ""
+    },
+    {
+      "id": 5,
+      "value": false,
+      "title": "BR",
+      "connected": false,
+      "ssid" : "",
+      "password" : ""
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
-          title: const Text('QR Home Page'),
-          centerTitle: true,
-          elevation: 5
-      ),
-      body: Container(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget> [
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget> [
-                    Center(
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: const Text('FL'),
-                      ),
-                    ),
-                    Center(
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          // start the SecondScreen and wait for it to finish with a result
-                          final result = await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => QRViewExample(),
-                              ));
-
-                          // after the SecondScreen result comes back update the Text widget with it
-                          setState(() {
-                            this.FLConnected = result[0];
-                            FLssid = result[1];
-                            FLpassword = result[2];
-                          });
-                          // Navigator.of(context).push(MaterialPageRoute(
-                          //   builder: (context) => const QRViewExample(FLConnected : false),
-                          // ));
-                        },
-                        child: const Text('Open QR View'),
-                      ),
-                    ),
-                    FLConnected ? Center(
-                      child: Icon(
-                        Icons.check,
-                        color: Colors.blue,
-                        size: 30.0,
-                      ),
-                    ):
-                    Center(
-                      child: Icon(
-                        Icons.close,
-                        color: Colors.blue,
-                        size: 30.0,
-                      ),
-                    ),
-                  ]
-              ),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget> [
-                    Center(
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: const Text('FR'),
-                      ),
-                    ),
-                    Center(
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          // start the SecondScreen and wait for it to finish with a result
-                          final result = await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => QRViewExample(),
-                              ));
-
-                          // after the SecondScreen result comes back update the Text widget with it
-                          setState(() {
-                            FRConnected = result[0];
-                            FRssid = result[1];
-                            FRpassword = result[2];
-                          });
-                          // Navigator.of(context).push(MaterialPageRoute(
-                          //   builder: (context) => const QRViewExample(FLConnected : false),
-                          // ));
-                        },
-                        child: const Text('Open QR View'),
-                      ),
-                    ),
-                    FRConnected ? Center(
-                      child: Icon(
-                        Icons.check,
-                        color: Colors.blue,
-                        size: 30.0,
-                      ),
-                    ):
-                    Center(
-                      child: Icon(
-                        Icons.close,
-                        color: Colors.blue,
-                        size: 30.0,
-                      ),
-                    ),
-                  ]
-              ),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget> [
-                    Center(
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: const Text('ML'),
-                      ),
-                    ),
-                    Center(
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          // start the SecondScreen and wait for it to finish with a result
-                          final result = await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => QRViewExample(),
-                              ));
-
-                          // after the SecondScreen result comes back update the Text widget with it
-                          setState(() {
-                            MLConnected = result[0];
-                            MLssid = result[1];
-                            MLpassword = result[2];
-                          });
-                          // Navigator.of(context).push(MaterialPageRoute(
-                          //   builder: (context) => const QRViewExample(FLConnected : false),
-                          // ));
-                        },
-                        child: const Text('Open QR View'),
-                      ),
-                    ),
-                    MLConnected ? Center(
-                      child: Icon(
-                        Icons.check,
-                        color: Colors.blue,
-                        size: 30.0,
-                      ),
-                    ):
-                    Center(
-                      child: Icon(
-                        Icons.close,
-                        color: Colors.blue,
-                        size: 30.0,
-                      ),
-                    ),
-                  ]
-              ),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget> [
-                    Center(
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: const Text('MR'),
-                      ),
-                    ),
-                    Center(
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          // start the SecondScreen and wait for it to finish with a result
-                          final result = await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => QRViewExample(),
-                              ));
-
-                          // after the SecondScreen result comes back update the Text widget with it
-                          setState(() {
-                            MRConnected = result[0];
-                            MRssid = result[1];
-                            MRpassword = result[2];
-                          });
-                          // Navigator.of(context).push(MaterialPageRoute(
-                          //   builder: (context) => const QRViewExample(FLConnected : false),
-                          // ));
-                        },
-                        child: const Text('Open QR View'),
-                      ),
-                    ),
-                    MRConnected ? Center(
-                      child: Icon(
-                        Icons.check,
-                        color: Colors.blue,
-                        size: 30.0,
-                      ),
-                    ):
-                    Center(
-                      child: Icon(
-                        Icons.close,
-                        color: Colors.blue,
-                        size: 30.0,
-                      ),
-                    ),
-                  ]
-              ),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget> [
-                    Center(
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: const Text('BL'),
-                      ),
-                    ),
-                    Center(
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          // start the SecondScreen and wait for it to finish with a result
-                          final result = await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => QRViewExample(),
-                              ));
-
-                          // after the SecondScreen result comes back update the Text widget with it
-                          setState(() {
-                            BLConnected = result[0];
-                            BLssid = result[1];
-                            BLpassword = result[2];
-                          });
-                          // Navigator.of(context).push(MaterialPageRoute(
-                          //   builder: (context) => const QRViewExample(FLConnected : false),
-                          // ));
-                        },
-                        child: const Text('Open QR View'),
-                      ),
-                    ),
-                    BLConnected ? Center(
-                      child: Icon(
-                        Icons.check,
-                        color: Colors.blue,
-                        size: 30.0,
-                      ),
-                    ):
-                    Center(
-                      child: Icon(
-                        Icons.close,
-                        color: Colors.blue,
-                        size: 30.0,
-                      ),
-                    ),
-                  ]
-              ),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget> [
-                    Center(
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: const Text('BR'),
-                      ),
-                    ),
-                    Center(
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          // start the SecondScreen and wait for it to finish with a result
-                          final result = await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => QRViewExample(),
-                              ));
-
-                          // after the SecondScreen result comes back update the Text widget with it
-                          setState(() {
-                            BRConnected = result[0];
-                            BRssid = result[1];
-                            BRpassword = result[2];
-                          });
-                          // Navigator.of(context).push(MaterialPageRoute(
-                          //   builder: (context) => const QRViewExample(FLConnected : false),
-                          // ));
-                        },
-                        child: const Text('Open QR View'),
-                      ),
-                    ),
-                    BRConnected ? Center(
-                      child: Icon(
-                        Icons.check,
-                        color: Colors.blue,
-                        size: 30.0,
-                      ),
-                    ):
-                    Center(
-                      child: Icon(
-                        Icons.close,
-                        color: Colors.blue,
-                        size: 30.0,
-                      ),
-                    ),
-                  ]
-              ),
-            ]
+        appBar: AppBar(
+            title: const Text('QR Home Page'),
+            centerTitle: true,
+            elevation: 5
         ),
-      ),
+        body:Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 64.0),
+            child: Column(
+              children: [
+                Text('Select any of the options to proceed.',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500,)),
+                SizedBox(height: 10),
+                Column(
+                  children: List.generate(
+                    checkListItems.length,
+                        (index) => CheckboxListTile(
+                      controlAffinity: ListTileControlAffinity.leading,
+                      contentPadding: EdgeInsets.zero,
+                      dense: true,
+                      title: Text(
+                        checkListItems[index]["title"],
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                          color: Colors.black,
+                        ),
+                      ),
+                      value: checkListItems[index]["value"],
+                      onChanged: (bool? value) {
+                        setState(() {
+                          checkListItems[index]["value"] = value;
+                          if (multipleSelected.contains(checkListItems[index])) {
+                            multipleSelected.remove(checkListItems[index]);
+                          } else {
+                            multipleSelected.add(checkListItems[index]);
+                          }
+                        });
+                      },
+                    ),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MyHome(selectedOptions: multipleSelected),
+                        ));
+                  },
+                  child: const Text('Open QR View'),
+                ),
+              ],
+            ),
+          ),
     );
   }
-
 }
+
 
